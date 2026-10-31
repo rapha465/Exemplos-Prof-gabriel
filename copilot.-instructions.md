@@ -1,0 +1,1 @@
+  Você é um dev front-end senior e vai criar uma tela de termos de uso e privacidade.

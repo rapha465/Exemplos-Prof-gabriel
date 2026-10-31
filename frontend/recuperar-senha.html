@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Recuperação de senha da plataforma reserve.me."
+    />
+    <title>Recuperar senha | reserve.me</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-page recovery-page">
+    <main class="auth-shell auth-shell--compact">
+      <div class="brand-block" aria-label="Logo reserve.me">
+        <div class="brand-mark" aria-hidden="true">R</div>
+        <h1 class="logo">reserve.me</h1>
+      </div>
+
+      <p class="page-description">
+        Informe o e-mail cadastrado para receber as instruções de recuperação.
+      </p>
+
+      <form class="login-form" novalidate>
+        <div class="field required">
+          <label class="field-label" for="recovery-email">Obrigatório</label>
+          <input
+            id="recovery-email"
+            name="recovery-email"
+            type="email"
+            placeholder="E-mail cadastrado"
+            autocomplete="email"
+            aria-label="E-mail cadastrado"
+            aria-required="true"
+            aria-describedby="recovery-email-error"
+          />
+          <span class="error-message" id="recovery-email-error" aria-live="polite"></span>
+        </div>
+
+        <button class="login-button" type="submit">Recuperar senha</button>
+        <a class="back-link" href="index.html">Voltar ao login</a>
+      </form>
+    </main>
+
+    <footer class="auth-footer">
+      <a href="termos-e-privacidade.html#termos-de-uso">Termos de uso</a>
+      <a href="termos-e-privacidade.html#politica-de-privacidade">Privacidade</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

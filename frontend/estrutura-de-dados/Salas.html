@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Consulte e solicite a reserva de salas de aula disponíveis na escola."
+    />
+    <title>Salas | reserve.me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="Salas.css" />
+    <script src="Reservas.js" defer></script>
+    <script src="Salas.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <a class="brand" href="../index.html" aria-label="reserve.me - página inicial">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span class="brand-name">reserve.me</span>
+      </a>
+      <a class="back-link" href="../index.html">Voltar ao início</a>
+    </header>
+
+    <main class="rooms-page">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Espaços da escola</p>
+        <h1 id="page-title">Salas disponíveis</h1>
+        <p>Consulte capacidade, localização e recursos e solicite a reserva de uma sala.</p>
+      </section>
+
+      <section class="rooms-section" aria-label="Lista de salas">
+        <div class="rooms-toolbar">
+          <label class="search-label" for="room-search">Buscar sala</label>
+          <input
+            id="room-search"
+            class="search-input"
+            type="search"
+            placeholder="Ex.: sala 101 ou tema Google"
+            autocomplete="off"
+          />
+          <p id="rooms-count" class="rooms-count" aria-live="polite"></p>
+        </div>
+        <div id="rooms-list" class="rooms-grid"></div>
+        <p id="empty-message" class="empty-message" hidden>
+          Nenhuma sala encontrada. Tente outro termo de busca.
+        </p>
+      </section>
+
+      <p id="reservation-status" class="reservation-status" role="status" aria-live="polite" hidden></p>
+      <p class="storage-notice">
+        As solicitações desta demonstração ficam salvas somente neste navegador.
+      </p>
+    </main>
+
+    <dialog id="reservation-dialog" class="reservation-dialog" aria-labelledby="reservation-title">
+      <form id="reservation-form" class="reservation-form">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Nova solicitação</p>
+            <h2 id="reservation-title">Reservar sala</h2>
+            <p id="selected-room" class="selected-room"></p>
+          </div>
+          <button
+            class="icon-button"
+            type="button"
+            data-close-dialog
+            aria-label="Fechar formulário"
+          >
+            ×
+          </button>
+        </div>
+
+        <input id="reservation-room-id" name="salaId" type="hidden" />
+
+        <div class="reservation-fields">
+          <div class="form-field">
+            <label for="reservation-date">Data <span aria-hidden="true">*</span></label>
+            <input id="reservation-date" name="data" type="date" required />
+          </div>
+          <div class="form-field">
+            <label for="reservation-start">Início <span aria-hidden="true">*</span></label>
+            <input id="reservation-start" name="inicio" type="time" required />
+          </div>
+          <div class="form-field">
+            <label for="reservation-end">Fim <span aria-hidden="true">*</span></label>
+            <input id="reservation-end" name="fim" type="time" required />
+          </div>
+          <div class="form-field form-field--wide">
+            <label for="reservation-owner">Responsável <span aria-hidden="true">*</span></label>
+            <input
+              id="reservation-owner"
+              name="responsavel"
+              type="text"
+              autocomplete="name"
+              maxlength="120"
+              required
+            />
+          </div>
+          <div class="form-field form-field--wide">
+            <label for="reservation-purpose">Finalidade <span aria-hidden="true">*</span></label>
+            <textarea
+              id="reservation-purpose"
+              name="finalidade"
+              rows="3"
+              maxlength="300"
+              required
+            ></textarea>
+          </div>
+        </div>
+
+        <p id="reservation-error" class="form-error" role="alert" hidden></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" data-close-dialog>Cancelar</button>
+          <button class="primary-button" type="submit">Enviar solicitação</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
