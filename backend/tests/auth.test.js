@@ -90,3 +90,19 @@ test("POST /api/auth/logout revoga o token de sessão", async () => {
 /**
  * @param {string} email E-mail da conta.
  */
+
+// backend/tests/auth.test.js
+const assert = require("node:assert/strict");
+const { test } = require("node:test");
+const { hashPassword, verifyPassword } = require("../src/auth");
+
+test("hashPassword protege a senha", async () => {
+  const hash = await hashPassword("minhaSenha123");
+  assert.notEqual(hash, "minhaSenha123");
+});
+
+test("verifyPassword valida a senha correta", async () => {
+  const hash = await hashPassword("minhaSenha123");
+  assert.equal(await verifyPassword("minhaSenha123", hash), true);
+  assert.equal(await verifyPassword("outraSenha", hash), false);
+});

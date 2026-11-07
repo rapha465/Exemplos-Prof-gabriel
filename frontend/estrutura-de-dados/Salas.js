@@ -1,5 +1,3 @@
-"use strict";
-
 const salas = [
   {
     id: 1,
@@ -35,11 +33,12 @@ const reservationDialog = document.querySelector("#reservation-dialog");
 const reservationForm = document.querySelector("#reservation-form");
 const selectedRoom = document.querySelector("#selected-room");
 const reservationRoomId = document.querySelector("#reservation-room-id");
-const reservationDate = document.querySelector("#reservation-date");
 const reservationStart = document.querySelector("#reservation-start");
 const reservationEnd = document.querySelector("#reservation-end");
 const reservationError = document.querySelector("#reservation-error");
 const reservationStatus = document.querySelector("#reservation-status");
+const reservationDate = document.querySelector("#reservation-date");
+const reservationHour = document.querySelector("#reservation-hour");
 const reservationsStorageKey = "reserve-me-reservas";
 
 function getLocalDateString(date = new Date()) {
@@ -126,7 +125,7 @@ function readReservations() {
 function showReservationError(message) {
   reservationError.textContent = message;
   reservationError.hidden = false;
-}
+  }
 
 reservationForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -204,3 +203,66 @@ function renderSalas() {
 
 roomSearch.addEventListener("input", renderSalas);
 renderSalas();
+
+
+reservationForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  reservationError.hidden = true;
+  reservationError.textContent = "";
+
+  if (!reservationHour.value) {
+    showReservationError("Informe a hora da reserva.");
+    reservationHour.focus();
+    return;
+  }
+
+  if (reservationStart.value >= reservationEnd.value) {
+    showReservationError("O horário de fim deve ser posterior ao horário de início.");
+    reservationEnd.focus();
+    return;
+  }
+
+  const sala = salas.find((item) => item.id === Number(reservationRoomId.value));
+  if (!sala) {
+    showReservationError("Não foi possível identificar a sala. Feche e tente novamente.");
+    return;
+  }
+
+  try {
+    const reservas = readReservations();
+    const nomeProfessor = reservationForm.elements.responsavel.value.trim();
+
+    const novaReserva = {
+      id: window.crypto?.randomUUID?.() ?? `reserva-${Date.now()}`,
+      salaId: sala.id,
+      sala: sala.nome,
+      data: reservationDate.value,
+      hora: reservationHour.value,
+      inicio: reservationStart.value,
+      fim: reservationEnd.value,
+      responsavel: nomeProfessor,
+      nomeProfessor,
+      finalidade: reservationForm.elements.finalidade.value.trim(),
+      situacao: "pendente",
+    };
+
+    if (existeConflito(novaReserva, reservas)) {
+      showReservationError("Esta sala já possui uma reserva ativa nesse horário. Escolha outro horário.");
+      return;
+    }
+
+    reservas.push(novaReserva);
+    window.localStorage.setItem(reservationsStorageKey, JSON.stringify(reservas));
+    reservationDialog.close();
+    reservationStatus.classList.remove("is-error");
+    reservationStatus.textContent = `Solicitação enviada para ${sala.nome}. Situação: pendente.`;
+    reservationStatus.hidden = false;
+  } catch (error) {
+    showReservationError(
+      error instanceof SyntaxError
+        ? "As reservas salvas neste navegador estão corrompidas. Não foi possível registrar a solicitação."
+        : "Não foi possível salvar a solicitação neste navegador. Verifique as permissões de armazenamento e tente novamente.",
+    );
+    console.error("Falha ao salvar solicitação de reserva:", error);
+  }
+});

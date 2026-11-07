@@ -132,7 +132,7 @@ h1 {
   min-height: 48px;
   padding: 0 14px;
   border: 2px solid var(--stone);
-  border-radius: 14px 6px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.72);
   color: var(--ink);
   font: inherit;
@@ -161,9 +161,9 @@ h1 {
   min-height: 250px;
   padding: 22px;
   border: 1px solid rgba(31, 26, 26, 0.1);
-  border-radius: 22px 8px;
+  border-radius: 28px 12px;
   background: rgba(255, 255, 255, 0.76);
-  box-shadow: 0 12px 28px rgba(31, 26, 26, 0.08);
+  box-shadow: 0 18px 34px rgba(31, 26, 26, 0.01);
 }
 
 .room-card h2 {
@@ -215,8 +215,7 @@ h1 {
 .secondary-button,
 .icon-button {
   border: 0;
-  border-radius: 14px 5px;
-  font: inherit;
+  border-radius: 18px 8px;
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -276,10 +275,10 @@ h1 {
   padding: 0;
   overflow: auto;
   border: 1px solid rgba(31, 26, 26, 0.16);
-  border-radius: 24px 8px;
+  border-radius:  28px 12px;
   background: var(--cream);
   color: var(--ink);
-  box-shadow: 0 24px 70px rgba(31, 26, 26, 0.24);
+  box-shadow: 0 24px 70px rgba(31, 26, 26, 0.15);
 }
 
 .reservation-dialog::backdrop {

@@ -1,5 +1,3 @@
-"use strict";
-
 const http = require("node:http");
 const { createAuthService, hashPassword } = require("./auth");
 

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node backend/src/server.js",
     "dev": "node --watch backend/src/server.js",
-    "test": "echo \"No tests configured yet\" && exit 0"
+    "test": "node --test backend/tests/*.test.js"
   },
   "keywords": [
     "reservas",
@@ -17,3 +17,4 @@
   "author": "Gabriel",
   "license": "MIT"
 }
+
